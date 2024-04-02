@@ -115,6 +115,7 @@ namespace BT2
         //hiển thị danh sách học sinh
         static void hienthi()
         {
+            Console.OutputEncoding = Encoding.UTF8;
             for (int i = 1; i <= hocsinh.Count; i++)
             {
                 Console.Write("STT {0} - ", i);
@@ -129,6 +130,7 @@ namespace BT2
             string tukhoa = Console.ReadLine();
             foreach (var hoten in hocsinh)
             {
+                Console.OutputEncoding = Encoding.UTF8;
                 if (tukhoa == hoten.hoten)
                 {
                     Console.WriteLine($"Họ và tên: {hoten.hoten}, Năm sinh: {hoten.namsinh}, Điểm trung bình: {hoten.diemtrungbinh}");
