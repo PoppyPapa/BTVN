@@ -1,13 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\H\u1ECDc L\u1EADp tr\u00ECnh\\BT1\\",
+  "WorkspaceRootPath": "E:\\H\u1ECDc L\u1EADp tr\u00ECnh\\BTVN\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7A0473B1-31CC-4AFC-AFBD-31E9AD70F735}|BT1\\BT1.csproj|e:\\h\u1ECDc l\u1EADp tr\u00ECnh\\bt1\\bt1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A0473B1-31CC-4AFC-AFBD-31E9AD70F735}|BT1\\BT1.csproj|solutionrelative:bt1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB1CD6D9-CFAE-4FC9-990E-C74633E38413}|BT3\\BT3.csproj|e:\\h\u1ECDc l\u1EADp tr\u00ECnh\\btvn\\bt3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB1CD6D9-CFAE-4FC9-990E-C74633E38413}|BT3\\BT3.csproj|solutionrelative:bt3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\H\u1ECDc L\u1EADp tr\u00ECnh\\CSharpCoBan\\CSharpCoBan\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2F08F677-839A-4FD4-9D45-26365A7486DF}|BT2\\BT2.csproj|e:\\h\u1ECDc l\u1EADp tr\u00ECnh\\btvn\\bt2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F08F677-839A-4FD4-9D45-26365A7486DF}|BT2\\BT2.csproj|solutionrelative:bt2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -17,31 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\H\u1ECDc L\u1EADp tr\u00ECnh\\CSharpCoBan\\CSharpCoBan\\Program.cs",
-              "RelativeDocumentMoniker": "..\\CSharpCoBan\\CSharpCoBan\\Program.cs",
-              "ToolTip": "E:\\H\u1ECDc L\u1EADp tr\u00ECnh\\CSharpCoBan\\CSharpCoBan\\Program.cs",
-              "RelativeToolTip": "..\\CSharpCoBan\\CSharpCoBan\\Program.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAACsAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-01T15:56:41.326Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "E:\\H\u1ECDc L\u1EADp tr\u00ECnh\\BT1\\BT1\\Program.cs",
-              "RelativeDocumentMoniker": "BT1\\Program.cs",
-              "ToolTip": "E:\\H\u1ECDc L\u1EADp tr\u00ECnh\\BT1\\BT1\\Program.cs",
-              "RelativeToolTip": "BT1\\Program.cs",
-              "ViewState": "AQIAAHEAAAAAAAAAAAAAAH0AAACBAAAA",
+              "DocumentMoniker": "E:\\H\u1ECDc L\u1EADp tr\u00ECnh\\BTVN\\BT3\\Program.cs",
+              "RelativeDocumentMoniker": "BT3\\Program.cs",
+              "ToolTip": "E:\\H\u1ECDc L\u1EADp tr\u00ECnh\\BTVN\\BT3\\Program.cs",
+              "RelativeToolTip": "BT3\\Program.cs",
+              "ViewState": "AQIAAIkAAAAAAAAAAADwv6gAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-01T14:33:57.387Z",
+              "WhenOpened": "2024-04-02T13:40:07.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\H\u1ECDc L\u1EADp tr\u00ECnh\\BTVN\\BT2\\Program.cs",
+              "RelativeDocumentMoniker": "BT2\\Program.cs",
+              "ToolTip": "E:\\H\u1ECDc L\u1EADp tr\u00ECnh\\BTVN\\BT2\\Program.cs",
+              "RelativeToolTip": "BT2\\Program.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAgwD4AAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-02T16:32:49.115Z",
               "EditorCaption": ""
             }
           ]

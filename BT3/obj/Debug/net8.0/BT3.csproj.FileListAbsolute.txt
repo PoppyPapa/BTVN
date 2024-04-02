@@ -1,0 +1,15 @@
+E:\Học Lập trình\BTVN\BT3\bin\Debug\net8.0\BT3.exe
+E:\Học Lập trình\BTVN\BT3\bin\Debug\net8.0\BT3.deps.json
+E:\Học Lập trình\BTVN\BT3\bin\Debug\net8.0\BT3.runtimeconfig.json
+E:\Học Lập trình\BTVN\BT3\bin\Debug\net8.0\BT3.dll
+E:\Học Lập trình\BTVN\BT3\bin\Debug\net8.0\BT3.pdb
+E:\Học Lập trình\BTVN\BT3\obj\Debug\net8.0\BT3.GeneratedMSBuildEditorConfig.editorconfig
+E:\Học Lập trình\BTVN\BT3\obj\Debug\net8.0\BT3.AssemblyInfoInputs.cache
+E:\Học Lập trình\BTVN\BT3\obj\Debug\net8.0\BT3.AssemblyInfo.cs
+E:\Học Lập trình\BTVN\BT3\obj\Debug\net8.0\BT3.csproj.CoreCompileInputs.cache
+E:\Học Lập trình\BTVN\BT3\obj\Debug\net8.0\BT3.sourcelink.json
+E:\Học Lập trình\BTVN\BT3\obj\Debug\net8.0\BT3.dll
+E:\Học Lập trình\BTVN\BT3\obj\Debug\net8.0\refint\BT3.dll
+E:\Học Lập trình\BTVN\BT3\obj\Debug\net8.0\BT3.pdb
+E:\Học Lập trình\BTVN\BT3\obj\Debug\net8.0\BT3.genruntimeconfig.cache
+E:\Học Lập trình\BTVN\BT3\obj\Debug\net8.0\ref\BT3.dll

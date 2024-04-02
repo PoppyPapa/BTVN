@@ -5,3 +5,10 @@ E:\Học Lập trình\BT1\BT1\bin\Debug\BT1.exe
 E:\Học Lập trình\BT1\BT1\bin\Debug\BT1.pdb
 E:\Học Lập trình\BT1\BT1\obj\Debug\BT1.exe
 E:\Học Lập trình\BT1\BT1\obj\Debug\BT1.pdb
+E:\Học Lập trình\BTVN\BT1\bin\Debug\BT1.exe.config
+E:\Học Lập trình\BTVN\BT1\bin\Debug\BT1.exe
+E:\Học Lập trình\BTVN\BT1\bin\Debug\BT1.pdb
+E:\Học Lập trình\BTVN\BT1\obj\Debug\BT1.csproj.AssemblyReference.cache
+E:\Học Lập trình\BTVN\BT1\obj\Debug\BT1.csproj.CoreCompileInputs.cache
+E:\Học Lập trình\BTVN\BT1\obj\Debug\BT1.exe
+E:\Học Lập trình\BTVN\BT1\obj\Debug\BT1.pdb
