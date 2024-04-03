@@ -22,7 +22,7 @@ namespace ListOfBills
         static List<Bill> ListBill = new List<Bill>();
         static bool IsValidName(string Name)
         {
-            string pattern = @"^[A-Za-z\s+$";
+            string pattern = @"^[A-Za-z\s()]+$";
             return Regex.IsMatch(Name, pattern);
         }
         static void Main(string[] args)
