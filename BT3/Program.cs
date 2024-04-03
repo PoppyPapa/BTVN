@@ -1,5 +1,7 @@
+using Microsoft.VisualBasic;
 using System;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using static System.Net.Mime.MediaTypeNames;
@@ -48,7 +50,7 @@ namespace ListOfBills
                     Console.WriteLine("\nEnter choice: ");
 
                     string text = Console.ReadLine();
-                    for (i = 0; i < 1;)
+                    while(true || choice != 6)
                     {
                         bool isNum = int.TryParse(text, out choice);
                         if (isNum == false && choice < 0 && choice > 5)
@@ -75,9 +77,14 @@ namespace ListOfBills
                             Select_day();
                             break;
                         case 5:
+                            Paid_bill();
                             break;
                         case 6:
-                            choice = 0;
+                            {
+                                choice = 6;
+                                Console.WriteLine("**** Program End!!! ****"); 
+                            }
+                            
                             break;
                         default:
                             Console.WriteLine("Enter again: ");
@@ -125,7 +132,17 @@ namespace ListOfBills
 
                 //Release Date
                 Console.WriteLine("Enter Release date (MM/DD/YYYY): ");
-                bill.bill_ReleaseDate = DateTime.ParseExact(Console.ReadLine(), "MM/dd/yyyy", null);
+                string date = Console.ReadLine();   
+                string format = "MM/dd/yyyy";
+                bool IsValidDate = DateTime.TryParseExact(date, format, null, System.Globalization.DateTimeStyles.None, out bill.bill_ReleaseDate);
+
+                while (IsValidDate == false || bill.bill_ReleaseDate < DateTime.Today)
+                {
+                    Console.WriteLine("Enter date Error!!");
+                    Console.WriteLine("Enter again (MM/DD/YYYY): ");
+                    bill.bill_ReleaseDate = DateTime.ParseExact(Console.ReadLine(), "MM/dd/yyyy", null);
+                }
+                
 
                 //Total Price
                 Console.WriteLine("Enter Total Price ($): ");
@@ -230,10 +247,12 @@ namespace ListOfBills
                     Console.WriteLine($"Bill ID: {Overdate_bill.bill_ID}, Customer Name: {Overdate_bill.bill_CustomerName}, Release date: {Overdate_bill.bill_ReleaseDate}, Total price: {Overdate_bill.bill_TotalPrice}, Amout debt: {Overdate_bill.bill_debt}.");
                 }    
             }
+            return;
+            
         }
         static void Select_day()
         {
-            Console.WriteLine("30/60/90");
+            Console.WriteLine("Input number of day (30/60/90): ");
             int days = Convert.ToInt32(Console.ReadLine());
             switch(days)
             {
@@ -249,11 +268,28 @@ namespace ListOfBills
                 default:
                     Console.WriteLine("Enter again: ");
                     break;
-            }     
+            }    
+  
         }
-        static void ExporttoFile()
+        static void ExporttoFile(string path, List<Bill> listbill)
         {
-
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                foreach (var bill in ListBill)
+                {
+                    if (!bill.bill_Status)
+                    {
+                        writer.WriteLine(($"Bill ID: {bill.bill_ID}, Customer Name: {bill.bill_CustomerName}, Release date: {bill.bill_ReleaseDate}, Total price: {bill.bill_TotalPrice}, Amout debt: {bill.bill_debt}."));
+                    }
+                }
+            }
+           
         }
+        static void Paid_bill()
+        {
+            ExporttoFile("Bill paid.txt", ListBill);
+        }
+
+
     }
 }
