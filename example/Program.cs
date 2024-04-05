@@ -1,328 +1,327 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using static VuQuangLinh_BT_Buoi4.Bai1;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace VuQuangLinh_BT_Buoi4
+namespace BT3
 {
-    // Cac ham kiem tra input
+    //Create User Credentials
+    public class Account
+    {
+        const string UserName = "Admin";
+        const string Password = "Admin";
+
+        public bool IsValidChar(string Input)
+        {
+            string pattern = @"^[A-Za-z0-9._@]+$";
+            return Regex.IsMatch(Input, pattern);
+        }
+        public bool Checked_Accout(string _UserName, string _Password)
+        {
+            if (_UserName == null || _Password == null)
+                return false;
+            else if (_UserName != UserName || _Password != Password)
+                return false;
+            else if (_UserName == " " || _Password == " ")
+                return false;
+            else
+                return true;
+
+        }
+        public void Enter_Accout(ref string _UserName, ref string _Password)
+        {
+            Console.WriteLine("Enter your Username:");
+            _UserName = Console.ReadLine();
+
+
+            Console.WriteLine("Enter your Password:");
+            _Password = Console.ReadLine();
+        }
+        public void UserCredentials(ref string _Username, ref string _Password)
+        {
+            Enter_Accout(ref _Username, ref _Password);
+            while (true)
+            {
+
+                if (IsValidChar(_Username) && IsValidChar(_Password))
+                {
+                    if (Checked_Accout(_Username, _Password))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The Username or Password that you entered is incorrect. Please try again: ");
+                        Enter_Accout(ref _Username, ref _Password);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("The Username or Password that you entered is incorrect. Please try again: ");
+                    Enter_Accout(ref _Username, ref _Password);
+                }
+            }
+        }
+    }
     public class CheckInput
     {
-        public bool ContainsNumber(string input)
+        public static bool IsValidName(string Name)
         {
-            return input.Any(char.IsDigit);
+            string pattern = @"^[A-Za-z\s]+$";
+            return Regex.IsMatch(Name, pattern);
         }
-        public bool ContainSpecialChar(string input)
+        public static bool IsValidNum(string input)
         {
-            Regex specialCharRegex = new Regex(@"[~`!@#$%^&*()+=|\\{}':;,.<>?/""-]");
-            return specialCharRegex.IsMatch(input);
+            int num;
+            return int.TryParse(input, out num);
         }
-        public bool CheckYear(int input)
+        public static bool IsValidFormatDay(string input, DateTime output)
         {
-            return (input < 0 || input > DateTime.Now.Year);
+            string format = "dd/MM/yyyy";
+            return DateTime.TryParseExact(input, format, null, System.Globalization.DateTimeStyles.None, out output);
+
         }
-        public bool CheckIsNum(string data, int num)
+        public static bool IsOver18(DateTime birthDate)
         {
-            return Int32.TryParse(data, out num);
-        }
-        public bool CheckFloat(string data, float num)
-        {
-            return float.TryParse(data, out num);
+            DateTime currentDate = DateTime.Today;
+            int age = currentDate.Year - birthDate.Year;
+            if (birthDate > currentDate.AddYears(-age))
+                age--;
+            return age >= 18;
         }
     }
-
-
-    // Class Bai 1
-    internal class Bai1 : CheckInput
+    public struct EmployeeInfo
     {
-        List<Book> list_books = new List<Book>();
-        public struct Book
+        public static string FirstName { get; set; }
+        public static string LastName { get; set; }
+        public static int ID { get; set; }
+
+        public static DateTime Birthday { get; set; }
+        public static DateTime JoinDay { get; set; }
+
+        public EmployeeInfo(string _FirstName, string _LastName, int _ID, DateTime _Birthday, DateTime _JoinDay)
         {
-            public string title { get; set; }
-            public string author { get; set; }
-            public int year_publish { get; set; }
+            FirstName = _FirstName;
+            LastName = _LastName;
+            ID = _ID;
+            Birthday = _Birthday;
+            JoinDay = _JoinDay;
         }
-        public void ExecuteTask1()
+        public List<EmployeeInfo> _EmployeeInfos = new List<EmployeeInfo>();
+
+        public static int Number_Employee()
         {
-            bool flag = false;
+            string text;
+            int Num = 0, n, temp = 0;
             do
             {
-                int choice = -1;
-                Console.WriteLine("\n------Menu quan ly sach------");
-                Console.WriteLine("1. Them sach moi");
-                Console.WriteLine("2. Hien thi danh sach cac cuon sach");
-                Console.WriteLine("3. Tim kiem sach theo tieu de");
-                Console.WriteLine("0. Thoat chuong trinh");
-                Console.WriteLine("\nNhap lua chon cua ban: ");
-                try
+                Console.WriteLine("Input Number of Employees: ");
+                text = Console.ReadLine();
+                if (!CheckInput.IsValidNum(text))
                 {
-                    choice = Int32.Parse(Console.ReadLine());
+                    Console.WriteLine("Input Number is incorrect. Please Enter again!");
                 }
-                catch (FormatException e)
+                else
                 {
-                    Console.WriteLine(e.Message);
-                }
-                switch (choice)
-                {
-                    case 0: Console.WriteLine("Thoat khoi bai 1!"); flag = true; break;
-                    case 1: AddBook(); break;
-                    case 2: DisplayListBooks(); break;
-                    case 3: SearchByTitle(); break;
-                    default: Console.WriteLine("Lua chon chua dung, moi ban nhap lai!"); break;
-                }
-            } while (!flag);
-        }
-        public void AddBook()  // Them sach moi
-        {
-            Book new_book = new Book();
-            Console.WriteLine("\nNhap thong tin cuon sach moi: ");
-
-            // Xu li nhap tieu de
-            Console.Write("Nhap tieu de sach: ");
-            new_book.title = Console.ReadLine();
-            if (ContainSpecialChar(new_book.title))
-            {
-                Console.WriteLine("Tieu de khong duoc chua ki tu dac biet!");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(new_book.title))
-            {
-                Console.WriteLine("Tieu de khong duoc de trong!");
-                return;
-            }
-
-            // Xu li nhap ten tac gia
-            Console.Write("Nhap ten tac gia: ");
-            new_book.author = Console.ReadLine();
-            if (ContainsNumber(new_book.author))
-            {
-                Console.WriteLine("Ten tac gia khong duoc chua chu so!");
-                return;
-            }
-            if (ContainSpecialChar(new_book.author))
-            {
-                Console.WriteLine("Ten tac gia khong duoc chua ki tu dac biet!");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(new_book.title))
-            {
-                Console.WriteLine("Ten tac gia khong duoc de trong!");
-                return;
-            }
-
-            // Xu li nhap nam xuat ban
-            Console.Write("Nhap nam xuat ban: ");
-            string year;
-            year = Console.ReadLine();
-            if (!CheckIsNum(year, new_book.year_publish))
-            {
-                Console.WriteLine("Nam xuat ban phai la so va khong duoc bo trong!");
-                return;
-            }
-            else
-                new_book.year_publish = Int32.Parse(year);
-
-            if (CheckYear(new_book.year_publish))
-            {
-                Console.WriteLine("Nam xuat ban phai la so nguyen duong va khong lon hon nam hien tai!");
-                return;
-            }
-
-            // Them vao danh sach cac cuon sach
-            list_books.Add(new_book);
-        }
-
-        public void DisplayListBooks() // Hien thi tat ca sach
-        {
-            if (list_books.Count == 0)
-            {
-                Console.WriteLine("Khong co thong tin cuon sach nao!");
-            }
-            else
-            {
-                Console.WriteLine("\nThong tin cac cuon sach dang co: ");
-                foreach (Book book in list_books)
-                {
-                    Console.WriteLine();
-                    Display(book);
+                    Num = int.Parse(text);
+                    if (Num < 1 || Num > 10)
+                        Console.WriteLine("Input Number is incorrect. Please Enter again!");
+                    else
+                        break;
                 }
             }
+            while (!CheckInput.IsValidNum(text) || Num < 1 || Num > 10);
+            return Num;
         }
-        public void Display(Book book) // Hien thi 1 cuon sach
+        public static string Enter_FirstName()
         {
-            Console.WriteLine("Tieu de: " + book.title + ", " + "Tac gia: " + book.author + ", " + "Nam XB: " + book.year_publish);
-        }
-        public void SearchByTitle() // Tim kiem theo tieu de sach
-        {
-            Console.Write("Nhap vao tieu de cuon sach muon tim: ");
-            string search = Console.ReadLine();
-            bool flag = false;
-            foreach (Book book in list_books)
-            {
-                if (book.title == search)
-                {
-                    flag = true;
-                    Console.WriteLine("Cac cuon sach co tieu de " + '"' + search + '"' + " la: ");
-                    Display(book);
-                }
-            }
-            if (!flag)
-                Console.WriteLine("Khong tim thay ket qua!");
-        }
-
-    }
-
-
-    // Class Bai 2
-    internal class Bai2 : CheckInput
-    {
-        List<Student> list_students = new List<Student>();
-        public struct Student
-        {
-            public string name { get; set; }
-            public int age { get; set; }
-            public float average_score { get; set; }
-        }
-        public void ExecuteTask2()
-        {
-            bool flag = false;
             do
             {
-                int choice = -1;
-                Console.WriteLine("\n------Menu quan ly hoc sinh------");
-                Console.WriteLine("1. Them hoc sinh moi");
-                Console.WriteLine("2. Hien thi danh sach hoc sinh");
-                Console.WriteLine("3. Tim hoc sinh theo ten");
-                Console.WriteLine("0. Thoat chuong trinh");
-                Console.WriteLine("\nNhap lua chon cua ban: ");
-                try
+                Console.WriteLine("Enter First name (Nguyen Van): ");
+                if (CheckInput.IsValidName(Console.ReadLine()))
                 {
-                    choice = Int32.Parse(Console.ReadLine());
+                    FirstName = Console.ReadLine();
                 }
-                catch (FormatException e)
+                else
                 {
-                    Console.WriteLine(e.Message);
-                }
-                switch (choice)
-                {
-                    case 0: Console.WriteLine("Thoat khoi bai 2!"); flag = true; break;
-                    case 1: AddStudent(); break;
-                    case 2: DisplayListStudents(); break;
-                    case 3: SearchByName(); break;
-                    default: Console.WriteLine("Lua chon chua dung, moi ban nhap lai!"); break;
-                }
-            } while (!flag);
-        }
-        public void AddStudent()  // Them hoc sinh moi
-        {
-            Student new_student = new Student();
-            Console.WriteLine("\nNhap thong tin hoc sinh moi: ");
-
-            // Xu li nhap ten
-            Console.Write("Nhap ten: ");
-            new_student.name = Console.ReadLine();
-            if (ContainsNumber(new_student.name))
-            {
-                Console.WriteLine("Ten hoc sinh khong duoc chua chu so!");
-                return;
-            }
-            if (ContainSpecialChar(new_student.name))
-            {
-                Console.WriteLine("Ten hoc sinh khong chua ki tu dac biet!");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(new_student.name))
-            {
-                Console.WriteLine("Ten hoc sinh khong duoc de trong!");
-                return;
-            }
-
-            // Xu li nhap tuoi
-            Console.Write("Nhap tuoi: ");
-            string age = Console.ReadLine();
-            if (!CheckIsNum(age, new_student.age))
-            {
-                Console.WriteLine("Tuoi hoc sinh phai la mot so nguyen va khong duoc bo trong!");
-                return;
-            }
-            else
-                new_student.age = Int32.Parse(age);
-            if (new_student.age < 5 || new_student.age > 18)
-            {
-                Console.WriteLine("Tuoi hoc sinh phai tu 6 den 18 tuoi");
-                return;
-            }
-
-            // Xu li nhap diem trung binh
-            Console.Write("Nhap diem trung binh: ");
-            string avarage = Console.ReadLine();
-            if (!CheckFloat(avarage, new_student.average_score))
-            {
-                Console.WriteLine("Diem trung binh phai la so thuc va khong duoc bo trong!");
-                return;
-            }
-            else
-                new_student.average_score = float.Parse(avarage);
-            if (new_student.average_score < 0 || new_student.average_score > 10)
-            {
-                Console.WriteLine("Diem trung binh phai nam trong khoang tu 0 den 10");
-                return;
-            }
-
-            list_students.Add(new_student); // Them vao danh sach hoc sinh
-        }
-
-        public void DisplayListStudents() // Hien thi tat ca hoc sinh
-        {
-            if (list_students.Count == 0)
-            {
-                Console.WriteLine("Khong co thong tin hoc sinh nao!");
-            }
-            else
-            {
-                Console.WriteLine("\nThong tin cac hoc sinh dang co: ");
-                foreach (Student student in list_students)
-                {
-                    Console.WriteLine();
-                    Display(student);
+                    Console.WriteLine("Input Format is incorrect. Please Enter again!");
                 }
             }
+            while (!CheckInput.IsValidName(Console.ReadLine()));
+            return FirstName;
         }
-        public void Display(Student student) // Hien thi 1 hoc sinh
+        public static string Enter_LastName()
         {
-            Console.WriteLine("Ten: " + student.name + ", " + "Tuoi: " + student.age + ", " + "DTB: " + student.average_score);
-        }
-        public void SearchByName() // Tim kiem theo ten hoc sinh
-        {
-            Console.Write("Nhap vao ten hoc sinh muon tim: ");
-            string search = Console.ReadLine();
-            bool flag = false;
-            foreach (Student student in list_students)
+            do
             {
-                if (student.name == search)
+                Console.WriteLine("Enter First name (Nguyen Van): ");
+                if (CheckInput.IsValidName(Console.ReadLine()))
                 {
-                    flag = true;
-                    Console.WriteLine("Cac hoc sinh co ten " + '"' + search + '"' + " la: ");
-                    Display(student);
-                };
+                    LastName = Console.ReadLine();
+                    continue;
+                }
+                else
+                {
+                    Console.WriteLine("Input Format is incorrect. Please Enter again!");
+                }
             }
-            if (!flag)
-                Console.WriteLine("Khong tim thay ket qua!");
+            while (!CheckInput.IsValidName(Console.ReadLine()));
+            return LastName;
         }
+        public static int Enter_ID()
+        {
+            string text;
+            do
+            {
+                Console.WriteLine("Enter ID Employee: ");
+                text = Console.ReadLine();
+                if (!CheckInput.IsValidNum(text))
+                {
+                    Console.WriteLine("Input Format is incorrect. Please Enter again!");
+                }
+                else
+                {
+                    ID = int.Parse(text);
+                }
+            }
+            while (!CheckInput.IsValidNum(text));
+            return ID;
+        }
+        public static DateTime Enter_Birthday()
+        {
+            string text;
+            do
+            {
+                Console.WriteLine("Enter Employee's Birthday: ");
+                text = Console.ReadLine();
+                if (!CheckInput.IsValidFormatDay(text, Birthday))
+                {
+
+                    Console.WriteLine("Input Format is incorrect. Please Enter again!");
+                    Console.WriteLine("Enter Employee's Birthday: ");
+                }
+                else if (!CheckInput.IsOver18(Birthday))
+                {
+                    Console.WriteLine("Eployee's Age under 18. Please Enter again!");
+                    Console.WriteLine("Enter Employee's Birthday: ");
+                }
+            }
+            while (!CheckInput.IsValidFormatDay(text, Birthday));
+            return Birthday;
+        }
+        public static DateTime Enter_Joiningday()
+        {
+            string text;
+            do
+            {
+                Console.WriteLine("Enter the joining date: ");
+                text = Console.ReadLine();
+                if (!CheckInput.IsValidFormatDay(text, JoinDay))
+                {
+                    Console.WriteLine("Input Format is incorrect. Please Enter again!");
+                    Console.WriteLine("Enter joining date: ");
+                }
+                else if (JoinDay > DateTime.Today)
+                {
+                    Console.WriteLine("The joining date cannot be later than the the current date. Please Enter again!");
+                    Console.WriteLine("Enter joining date: ");
+                }
+            }
+            while (!CheckInput.IsValidFormatDay(text, JoinDay));
+            return JoinDay;
+        }
+
+
     }
-
-
-    // Class Bai 3
-    internal class Bai3
+    public class Program
     {
-        public void ExecuteTask3()
+        static void Main(string[] args)
         {
+            //Login 
+            string UserName = "";
+            string Password = "";
+
+            Account Account = new Account();
+            Account.UserCredentials(ref UserName, ref Password);
+            
+            string text;
+            int choice = 0;
+            while (true)
+            {
+                if (choice == 6)
+                    break;
+                else
+                {
+                    Console.OutputEncoding = Encoding.UTF8;
+                    Console.WriteLine("\n");
+                    Console.WriteLine("********* MENU ********");
+                    Console.WriteLine("       **********      ");
+                    Console.WriteLine("1. Add more bills.");
+                    Console.WriteLine("2. Clear Debt bill.");
+                    Console.WriteLine("3. Display bill.");
+                    Console.WriteLine("4. Display debt bill out of date (30/60/90)");
+                    Console.WriteLine("5. Export to text file.");
+                    Console.WriteLine("6. Exit.");
+                    Console.WriteLine("**********************");
+                    Console.WriteLine("\nEnter choice: ");
+                    do
+                    {
+                        text = Console.ReadLine();
+                        choice = int.Parse(text);
+                        if (!CheckInput.IsValidNum(text) || choice < 0 || choice > 5)
+                        {
+                            Console.WriteLine("\nPLease, enter again: ");     
+                        }
+                        else
+                        {
+                            break;
+                        }    
+                            
+                    }
+                    while (!CheckInput.IsValidNum(text) || choice < 0 || choice > 5);
+                    switch (choice)
+                    {
+                        case 1:
+                            
+                            break;
+                        case 2:
+                            //ClearDebt();
+                            break;
+                        case 3:
+                            //DisplayBill();
+                            break;
+                        case 4:
+                            //Select_day();
+                            break;
+                        case 5:
+                            //Paid_bill();
+                            break;
+                        case 6:
+                            {
+                                choice = 6;
+                                Console.WriteLine("**** Program End!!! ****");
+                            }
+
+                            break;
+                        default:
+                            Console.WriteLine("Enter again: ");
+                            break;
+                                
+
+                    }
+                }
+            }
+
+
+            Console.WriteLine("");
+        }
+        public static void choice_1()
+        {
+           
+            employee.AddtoList(employee.Number_Employee(), new EmployeeInfo(employee.FirstName, employee.LastName, employee.ID, employee.Birthday, employee.JoinDay));
 
         }
+            //Console.WriteLine("hi!");
+            
     }
-
 }
