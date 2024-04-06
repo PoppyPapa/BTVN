@@ -300,10 +300,9 @@ namespace EmployeeManagement
         public static void choice_1()
         {
             int Number = EmployeeInfo.Number_Employee();
-            int temp = 1;
-            do
+            for (int temp = 0; temp < Number; temp++)
             {
-                Console.WriteLine($"\nEnter information of employee number {temp}: ");
+                Console.WriteLine($"\nEnter information of employee number {temp + 1}: ");
                 EmployeeInfo _Employee = new EmployeeInfo();
                 _Employee.Enter_FirstName();
                 _Employee.Enter_LastName();
@@ -311,9 +310,7 @@ namespace EmployeeManagement
                 _Employee.Enter_DateOfBirth();
                 _Employee.Enter_DateOfStart();
                 Employees.Add(_Employee);
-                temp++;
             }
-            while (temp == Number);
         }
         public static void choice_2()
         {
