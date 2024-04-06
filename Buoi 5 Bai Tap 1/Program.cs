@@ -184,7 +184,7 @@ namespace EmployeeManagement
             string text;
             do
             {
-                Console.WriteLine("Enter Employee's Birthday: ");
+                Console.WriteLine("Enter Employee's Birthday (DD/MM/YYYY): ");
                 text = Console.ReadLine();
                 if (!CheckInput.IsValidFormatDay(text, Birthday))
                 {
@@ -203,7 +203,7 @@ namespace EmployeeManagement
             string text;
             do
             {
-                Console.WriteLine("Enter the starting date: ");
+                Console.WriteLine("Enter the starting date (DD/MM/YYYY): ");
                 text = Console.ReadLine();
                 if (!CheckInput.IsValidFormatDay(text, StartDay))
                 {
