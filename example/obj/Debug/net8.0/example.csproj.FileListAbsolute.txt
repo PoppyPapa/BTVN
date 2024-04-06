@@ -1,5 +1,0 @@
-E:\Học Lập trình\BTVN\example\obj\Debug\net8.0\example.GeneratedMSBuildEditorConfig.editorconfig
-E:\Học Lập trình\BTVN\example\obj\Debug\net8.0\example.AssemblyInfoInputs.cache
-E:\Học Lập trình\BTVN\example\obj\Debug\net8.0\example.AssemblyInfo.cs
-E:\Học Lập trình\BTVN\example\obj\Debug\net8.0\example.csproj.CoreCompileInputs.cache
-E:\Học Lập trình\BTVN\example\obj\Debug\net8.0\example.sourcelink.json
